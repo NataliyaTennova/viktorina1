@@ -4,22 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <title>Викторина в модальном окне</title>
+    <title>Викторина</title>
 </head>
 <body>
     <h1>Добро пожаловать в Викторину!</h1>
-    <button id="open-quiz">Начать викторину</button>
+    <button id="start-quiz">Начать викторину</button>
+    
+    <div id="quiz-container" style="display: none;">
+        <!-- Здесь будут вопросы -->
+    </div>
 
-    <!-- Модальное окно -->
-    <div id="quiz-modal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2>Викторина</h2>
-            <div id="quiz-container">
-                <!-- Здесь будут вопросы -->
-            </div>
-            <button id="submit">Отправить ответы</button>
-        </div>
+    <div id="result-container" style="display: none;">
+        <h2 id="result-message"></h2>
+        <button id="restart-quiz">Сыграть заново</button>
+        <button id="finish-quiz">Завершить</button>
     </div>
 
     <script src="script.js"></script>
