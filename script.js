@@ -2,7 +2,7 @@ const questions = [
     {
         question: "Какой язык используется для веб-разработки?",
         answers: ["Python", "JavaScript", "C++"],
-        correct: 1
+        correct: 1 // Индекс правильного ответа
     },
     // Добавь больше вопросов здесь
 ];
@@ -41,9 +41,19 @@ function loadQuestions() {
     });
 }
 
-// Отправка ответов (добавь свою логику)
+// Отправка ответов и проверка правильности
 document.getElementById('submit').onclick = function() {
-    // Здесь можно обработать неправильные/правильные ответы
-    alert("Ответы отправлены!");
+    let score = 0; // Переменная для подсчета количества верных ответов
+    questions.forEach((q, index) => {
+        const selectedAnswer = document.querySelector(`input[name="question${index}"]:checked`);
+        if (selectedAnswer) {
+            const answerIndex = parseInt(selectedAnswer.value);
+            if (answerIndex === q.correct) {
+                score++; // Увеличение счета за правильный ответ
+            }
+        }
+    });
+
+    alert(`Ваш результат: ${score} из ${questions.length}`); // Показ результата
     modal.style.display = "none"; // Закрытие модального окна
 }
