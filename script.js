@@ -15,6 +15,12 @@ document.addEventListener("DOMContentLoaded", function() {
     const restartQuizButton = document.getElementById('restart-quiz');
     const finishQuizButton = document.getElementById('finish-quiz');
 
+    // Проверка на существование элементов
+    if (!startQuizButton || !quizContainer || !resultContainer || !resultMessage || !restartQuizButton || !finishQuizButton) {
+        console.error("Не удалось найти один или несколько элементов на странице.");
+        return; // Если хотя бы один элемент не найден, прекратить выполнение скрипта
+    }
+
     let currentQuestionIndex = 0;
     let score = 0;
 
