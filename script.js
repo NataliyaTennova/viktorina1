@@ -4,56 +4,74 @@ const questions = [
         answers: ["Python", "JavaScript", "C++"],
         correct: 1 // Индекс правильного ответа
     },
-    // Добавь больше вопросов здесь
+    // Добавьте больше вопросов здесь
 ];
 
 const quizContainer = document.getElementById('quiz-container');
-const modal = document.getElementById('quiz-modal');
-const openQuizButton = document.getElementById('open-quiz');
-const closeButton = document.getElementsByClassName('close')[0];
+const startQuizButton = document.getElementById('start-quiz');
+const resultContainer = document.getElementById('result-container');
+const resultMessage = document.getElementById('result-message');
+const restartQuizButton = document.getElementById('restart-quiz');
+const finishQuizButton = document.getElementById('finish-quiz');
 
-// Открытие модального окна викторины
-openQuizButton.onclick = function() {
-    modal.style.display = "block";
-    loadQuestions();
+let currentQuestionIndex = 0;
+let score = 0;
+
+// Открытие викторины
+startQuizButton.onclick = function() {
+    startQuizButton.style.display = 'none';
+    quizContainer.style.display = 'block';
+    loadQuestion();
 }
 
-// Закрытие модального окна
-closeButton.onclick = function() {
-    modal.style.display = "none";
+// Загрузка текущего вопроса
+function loadQuestion() {
+    const currentQuestion = questions[currentQuestionIndex];
+    quizContainer.innerHTML = `<p>${currentQuestion.question}</p>`;
+    currentQuestion.answers.forEach((answer, i) => {
+        quizContainer.innerHTML += `<input type="radio" name="question" value="${i}"> ${answer}<br>`;
+    });
+    quizContainer.innerHTML += `<button id="next-question">Далее</button>`;
+    
+    // Обработчик для кнопки "Далее"
+    document.getElementById('next-question').onclick = function() {
+        checkAnswer();
+    };
 }
 
-// Закрытие модального окна при клике вне его
-window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
+// Проверка ответа
+function checkAnswer() {
+    const selectedAnswer = document.querySelector('input[name="question"]:checked');
+    if (selectedAnswer) {
+        const answerIndex = parseInt(selectedAnswer.value);
+        if (answerIndex === questions[currentQuestionIndex].correct) {
+            score++; // Увеличиваем счет за правильный ответ
+        }
+    }
+    currentQuestionIndex++;
+    if (currentQuestionIndex < questions.length) {
+        loadQuestion();
+    } else {
+        showResult();
     }
 }
 
-// Загрузка вопросов в контейнер
-function loadQuestions() {
-    quizContainer.innerHTML = ''; // Очистка контейнера
-    questions.forEach((q, index) => {
-        quizContainer.innerHTML += `<p>${q.question}</p>`;
-        q.answers.forEach((answer, i) => {
-            quizContainer.innerHTML += `<input type="radio" name="question${index}" value="${i}"> ${answer}<br>`;
-        });
-    });
+// Показать результаты
+function showResult() {
+    quizContainer.style.display = 'none';
+    resultContainer.style.display = 'block';
+    resultMessage.textContent = `Ваш результат: ${score} из ${questions.length}`;
 }
 
-// Отправка ответов и проверка правильности
-document.getElementById('submit').onclick = function() {
-    let score = 0; // Переменная для подсчета количества верных ответов
-    questions.forEach((q, index) => {
-        const selectedAnswer = document.querySelector(`input[name="question${index}"]:checked`);
-        if (selectedAnswer) {
-            const answerIndex = parseInt(selectedAnswer.value);
-            if (answerIndex === q.correct) {
-                score++; // Увеличение счета за правильный ответ
-            }
-        }
-    });
+// Перезапуск викторины
+restartQuizButton.onclick = function() {
+    score = 0;
+    currentQuestionIndex = 0;
+    resultContainer.style.display = 'none';
+    startQuizButton.style.display = 'block';
+}
 
-    alert(`Ваш результат: ${score} из ${questions.length}`); // Показ результата
-    modal.style.display = "none"; // Закрытие модального окна
+// Завершение викторины
+finishQuizButton.onclick = function() {
+    window.close(); // Закрытие вкладки (для браузеров, где это разрешено)
 }
