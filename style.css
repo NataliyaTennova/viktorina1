@@ -1,39 +1,68 @@
-/* Основные стили */
 body {
-    font-family: Arial, sans-serif;
-}
-
-.modal {
-    display: none; /* Скрываем модальное окно по умолчанию */
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%; /* Полная ширина */
-    height: 100%; /* Полная высота */
-    overflow: auto; /* Включает прокрутку при необходимости */
-    background-color: rgb(0,0,0); /* Черный фон */
-    background-color: rgba(0,0,0,0.4); /* Случайный фон с прозрачностью */
-}
-
-.modal-content {
-    background-color: #fefefe;
-    margin: 15% auto; /* 15% сверху и центрирование */
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f8ff; /* Светло-голубой фон */
+    color: #333; /* Цвет текста */
+    text-align: center; /* Центрирование текста */
     padding: 20px;
-    border: 1px solid #888;
-    width: 80%; /* Ширина модального окна */
 }
 
-.close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
+h1 {
+    color: #ff6347; /* Томатный красный цвет */
+    font-size: 2.5em; /* Крупный размер шрифта */
+    margin-bottom: 20px;
 }
 
-.close:hover,
-.close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
+button {
+    background-color: #4caf50; /* Зеленый цвет для кнопок */
+    color: white; /* Цвет текста на кнопках */
+    border: none; /* Убрать рамку */
+    border-radius: 5px; /* Скругленные углы */
+    padding: 15px 25px; /* Поля (отступы) */
+    font-size: 1.2em; /* Увеличенный размер шрифта */
+    cursor: pointer; /* Курсор-указатель */
+    transition: background-color 0.3s; /* Плавный переход для фона кнопки */
+}
+
+button:hover {
+    background-color: #45a049; /* Темный зеленый при наведении */
+}
+
+#quiz-container {
+    margin: 20px auto; /* Центрирование контейнера */
+    padding: 20px;
+    border-radius: 10px; /* Скругленные углы */
+    background-color: #fff; /* Белый фон */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Тень для контейнера */
+    max-width: 600px; /* Максимальная ширина контейнера */
+}
+
+input[type="radio"] {
+    margin-right: 10px; /* Отступ между радио кнопкой и текстом */
+}
+
+#result-container {
+    margin-top: 20px;
+    padding: 20px;
+    border-radius: 10px; /* Скругленные углы */
+    background-color: #f9f9f9; /* Светло-серый фон */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Тень для контейнера результатов */
+}
+
+#result-message {
+    font-size: 1.5em; /* Крупный размер текста для результата */
+    color: #ff6347; /* Томатный красный цвет */
+}
+
+/* Стиль для трансформации страницы */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+body {
+    animation: fadeIn 1s; /* Анимация при загрузке страницы */
 }
